@@ -40,17 +40,19 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         style={{ y: imgY }}
         transition={{ delay: 0.8, duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
-        className="hidden md:block absolute top-0 right-0 w-1/2 h-full z-0"
+        className="absolute top-0 right-0 w-full md:w-1/2 h-full z-0"
       >
         <img
           src="/tuleen.jpeg"
           alt="Tuleen Rezek"
           className="w-full h-full object-cover object-top"
         />
-        {/* fade left edge into background */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent" />
+        {/* mobile: heavy dark overlay so text is readable */}
+        <div className="absolute inset-0 bg-[#0A0A0A]/75 md:hidden" />
+        {/* desktop: fade left edge only */}
+        <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent" />
         {/* fade bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-transparent to-transparent" />
         {/* gold corner marks */}
         <div className="absolute top-24 right-8 w-7 h-7 border-t border-r border-gold/30" />
         <div className="absolute bottom-20 right-8 w-7 h-7 border-b border-r border-gold/30" />
