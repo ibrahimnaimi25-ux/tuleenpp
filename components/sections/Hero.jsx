@@ -40,7 +40,7 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         style={{ y: imgY }}
         transition={{ delay: 0.8, duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
-        className="absolute top-0 right-0 w-1/2 h-full z-0"
+        className="hidden md:block absolute top-0 right-0 w-1/2 h-full z-0"
       >
         <img
           src="/tuleen.jpeg"
