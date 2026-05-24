@@ -5,7 +5,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import MagneticButton from '../ui/MagneticButton';
 
 const socials = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/tuleen-rezek' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/tuleen-rezek-86b1b5297' },
   { label: 'Instagram', href: 'https://www.instagram.com/yourusername' },
 ];
 
