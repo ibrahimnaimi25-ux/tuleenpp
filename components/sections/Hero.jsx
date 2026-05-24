@@ -53,15 +53,15 @@ export default function Hero() {
         <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/40 to-transparent" />
         {/* fade bottom */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/90 via-transparent to-transparent" />
-        {/* gold corner marks */}
-        <div className="absolute top-24 right-8 w-7 h-7 border-t border-r border-gold/30" />
-        <div className="absolute bottom-20 right-8 w-7 h-7 border-b border-r border-gold/30" />
-        {/* name tag */}
+        {/* gold corner marks — desktop only */}
+        <div className="hidden md:block absolute top-24 right-8 w-7 h-7 border-t border-r border-gold/30" />
+        <div className="hidden md:block absolute bottom-20 right-8 w-7 h-7 border-b border-r border-gold/30" />
+        {/* name tag — sits above the marquee strip (~48px tall) */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 2.6, duration: 0.8 }}
-          className="absolute bottom-8 left-8 px-4 py-2 border border-white/[0.08] bg-black/50 backdrop-blur-sm"
+          className="absolute bottom-16 left-6 md:left-8 px-4 py-2 border border-white/[0.08] bg-black/50 backdrop-blur-sm"
         >
           <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-cream-muted">
             Tuleen Rezek · Amman, Jordan
@@ -155,7 +155,7 @@ export default function Hero() {
       {/* Bottom marquee */}
       <div className="relative z-10 border-t border-white/[0.05] py-4 overflow-hidden">
         <div className="marquee-wrap">
-          <div className="marquee-inner text-cream/[0.15] font-sans text-[10px] tracking-[0.4em] uppercase">
+          <div className="marquee-inner text-cream/[0.35] font-sans text-[10px] tracking-[0.4em] uppercase">
             {marqueeText.repeat(6)}
           </div>
         </div>
