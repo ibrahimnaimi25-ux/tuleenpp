@@ -10,8 +10,8 @@ const socials = [
 ];
 
 const inputClass =
-  'w-full bg-transparent border border-white/[0.08] text-cream font-sans text-sm font-light px-5 py-4 outline-none ' +
-  'placeholder:text-cream-muted/40 focus:border-gold/50 hover:border-white/20 transition-colors duration-300';
+  'w-full bg-white/[0.04] border border-white/20 text-cream font-sans text-sm font-light px-5 py-4 outline-none ' +
+  'placeholder:text-cream-muted/60 focus:border-gold focus:bg-white/[0.06] hover:border-white/40 transition-colors duration-300';
 
 export default function Contact() {
   const ref = useRef(null);
