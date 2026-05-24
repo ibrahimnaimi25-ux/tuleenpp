@@ -139,12 +139,12 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator — desktop only */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 3.4, duration: 0.8 }}
-        className="absolute left-6 md:left-14 bottom-16 flex flex-col items-center gap-3 z-10"
+        className="hidden md:flex absolute right-10 bottom-16 flex-col items-center gap-3 z-10"
       >
         <span className="font-sans text-[9px] tracking-[0.4em] uppercase text-cream-muted rotate-90 origin-center mb-6">Scroll</span>
         <div className="w-[1px] h-12 bg-gradient-to-b from-gold/60 to-transparent" />
