@@ -94,7 +94,7 @@ export default function Hero() {
                 animate={{ y: 0 }}
                 transition={{ delay: 1.8 + line.delay, duration: 1.05, ease: [0.76, 0, 0.24, 1] }}
                 className={`leading-[0.92] tracking-[-0.02em] font-display font-light
-                  text-[13vw] sm:text-[10vw] md:text-[8.5vw] lg:text-[7vw]
+                  text-[11vw] sm:text-[10vw] md:text-[8.5vw] lg:text-[7vw]
                   ${line.italic ? 'italic' : ''}
                   ${line.gold ? 'text-gold glow-text-gold' : 'text-cream'}
                 `}

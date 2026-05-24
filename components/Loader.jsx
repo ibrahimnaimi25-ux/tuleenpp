@@ -56,8 +56,8 @@ export default function Loader() {
               className="relative"
             >
               <span
-                className="font-display text-[5rem] font-light tracking-[0.5em] text-cream uppercase"
-                style={{ letterSpacing: '0.5em' }}
+                className="font-display text-[2.5rem] md:text-[5rem] font-light text-cream uppercase"
+                style={{ letterSpacing: '0.2em' }}
               >
                 TULEEN
               </span>
