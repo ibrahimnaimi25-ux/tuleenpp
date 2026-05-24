@@ -77,34 +77,91 @@ export default function Contact() {
           <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">05 / Contact</span>
         </motion.div>
 
-        {/* Main CTA */}
-        <div className="mb-16 md:mb-20">
-          {["Let's build", 'something', 'remarkable.'].map((line, i) => (
-            <div key={i} className="overflow-hidden">
-              <motion.h2
-                initial={{ y: '105%' }}
-                animate={inView ? { y: 0 } : {}}
-                transition={{ delay: 0.1 + i * 0.12, duration: 1, ease: [0.76, 0, 0.24, 1] }}
-                className={`font-display font-light leading-[0.93] tracking-tight
-                  text-[10vw] sm:text-[8vw] md:text-[6vw]
-                  ${i === 2 ? 'text-gold glow-text-gold italic' : 'text-cream'}
-                `}
-              >
-                {line}
-              </motion.h2>
-            </div>
-          ))}
-        </div>
+        {/* Main CTA — two columns */}
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 mb-16 md:mb-20 items-start">
 
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="font-sans text-sm text-cream-muted font-light max-w-sm leading-relaxed mb-16"
-        >
-          Interested in collaborations, freelance projects, or creative partnerships?
-          Fill in the form and I'll get back to you.
-        </motion.p>
+          {/* Left — headline + subtext */}
+          <div>
+            {["Let's build", 'something', 'remarkable.'].map((line, i) => (
+              <div key={i} className="overflow-hidden">
+                <motion.h2
+                  initial={{ y: '105%' }}
+                  animate={inView ? { y: 0 } : {}}
+                  transition={{ delay: 0.1 + i * 0.12, duration: 1, ease: [0.76, 0, 0.24, 1] }}
+                  className={`font-display font-light leading-[0.93] tracking-tight
+                    text-[10vw] sm:text-[8vw] md:text-[6vw] lg:text-[5vw]
+                    ${i === 2 ? 'text-gold glow-text-gold italic' : 'text-cream'}
+                  `}
+                >
+                  {line}
+                </motion.h2>
+              </div>
+            ))}
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="font-sans text-sm text-cream-muted font-light max-w-sm leading-relaxed mt-8"
+            >
+              Interested in collaborations, freelance projects, or creative partnerships?
+              Fill in the form and I'll get back to you.
+            </motion.p>
+          </div>
+
+          {/* Right — availability + services */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.4, duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+            className="space-y-5 lg:pt-4"
+          >
+            {/* Availability card */}
+            <div className="border border-white/[0.06] bg-[#0D0D0D] p-6 space-y-4">
+              <div className="flex items-center gap-3">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-400" />
+                </span>
+                <span className="font-sans text-[11px] tracking-[0.3em] uppercase text-green-400">
+                  Available for Work
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-4 pt-1">
+                {[
+                  { label: 'Based in', value: 'Amman, Jordan' },
+                  { label: 'Response', value: 'Within 24h' },
+                  { label: 'Open to', value: 'Remote Projects' },
+                  { label: 'Availability', value: 'Freelance & Full-time' },
+                ].map((item, i) => (
+                  <div key={i}>
+                    <p className="font-sans text-[9px] tracking-[0.25em] uppercase text-cream-muted mb-1">{item.label}</p>
+                    <p className="font-sans text-[12px] text-cream font-light">{item.value}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Services list */}
+            <div className="border border-white/[0.06] bg-[#0D0D0D] p-6">
+              <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-cream-muted mb-4">What I Offer</p>
+              <div className="space-y-2.5">
+                {[
+                  'Social Media Strategy & Management',
+                  'Content Creation & Reels',
+                  'Campaign Planning & Execution',
+                  'Paid Advertising (Meta Ads)',
+                  'Brand Storytelling',
+                  'Creative Direction',
+                ].map((service, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <span className="text-gold text-xs">✦</span>
+                    <span className="font-sans text-sm text-cream-muted font-light">{service}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
 
         {/* Two-column: form left, info right */}
         <div className="grid lg:grid-cols-[3fr_2fr] gap-16 lg:gap-24 mb-24">
