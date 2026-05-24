@@ -170,6 +170,56 @@ export default function About() {
                 ))}
               </div>
             </motion.div>
+
+            {/* Divider */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={rightInView ? { scaleX: 1 } : {}}
+              transition={{ delay: 0.75, duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+              className="w-full h-[1px] bg-gradient-to-r from-gold/40 to-transparent origin-left"
+            />
+
+            {/* Education */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={rightInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.8, duration: 0.7 }}
+              className="space-y-4"
+            >
+              <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-cream-muted">
+                Education
+              </p>
+              <div className="border border-white/[0.06] bg-[#0D0D0D] px-5 py-4 hover:border-gold/20 transition-colors duration-500">
+                <p className="font-sans text-sm font-light text-cream mb-1">
+                  Princess Sumaya University for Technology
+                </p>
+                <p className="font-sans text-[11px] text-gold/80 tracking-[0.1em] mb-1">
+                  Bachelor of E-Marketing & Social Media
+                </p>
+                <p className="font-sans text-[10px] text-cream-muted tracking-[0.2em] uppercase">
+                  Expected Graduation · 2026
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Download CV */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={rightInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.9, duration: 0.7 }}
+            >
+              <a
+                href="/tuleen-cv.pdf"
+                download
+                className="inline-flex items-center gap-3 font-sans text-[11px] tracking-[0.3em] uppercase font-medium px-8 py-4 border border-gold/40 text-gold hover:bg-gold hover:text-black transition-all duration-300"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M7 1v8M7 9l-3-3M7 9l3-3M1 11h12" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Download CV
+              </a>
+            </motion.div>
+
           </div>
         </div>
       </div>
