@@ -10,8 +10,8 @@ const socials = [
 ];
 
 const inputClass =
-  'w-full bg-white/[0.04] border border-white/20 text-cream font-sans text-sm font-light px-5 py-4 outline-none ' +
-  'placeholder:text-cream-muted/60 focus:border-gold focus:bg-white/[0.06] hover:border-white/40 transition-colors duration-300';
+  'w-full bg-white/[0.07] border border-white/30 text-cream font-sans text-sm font-light px-5 py-3.5 outline-none ' +
+  'placeholder:text-cream/40 focus:border-gold focus:bg-white/[0.10] hover:border-white/50 transition-colors duration-300';
 
 export default function Contact() {
   const ref = useRef(null);
@@ -78,7 +78,7 @@ export default function Contact() {
         </motion.div>
 
         {/* Main CTA — two columns */}
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 mb-16 md:mb-20 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 mb-12 md:mb-16 items-start">
 
           {/* Left — headline + subtext */}
           <div>
@@ -164,7 +164,7 @@ export default function Contact() {
         </div>
 
         {/* Two-column: form left, info right */}
-        <div className="grid lg:grid-cols-[3fr_2fr] gap-16 lg:gap-24 mb-24">
+        <div className="grid lg:grid-cols-[3fr_2fr] gap-12 lg:gap-20 mb-16">
 
           {/* Contact form */}
           <motion.form
@@ -172,9 +172,9 @@ export default function Contact() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.4, duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
             onSubmit={handleSubmit}
-            className="space-y-4"
+            className="space-y-3"
           >
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-3">
               <div className="relative">
                 <input
                   type="text"
@@ -214,11 +214,11 @@ export default function Contact() {
               onChange={handleChange}
               placeholder="Tell me about your project... *"
               required
-              rows={6}
+              rows={5}
               className={inputClass + ' resize-none'}
             />
 
-            <div className="flex items-center gap-6 pt-2">
+            <div className="flex items-center gap-6 pt-1">
               <MagneticButton strength={0.3}>
                 <button
                   type="submit"
