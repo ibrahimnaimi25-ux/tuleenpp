@@ -14,6 +14,7 @@ const projects = [
       'Built a trendy social media presence for a Jordanian café targeting Gen Z audiences. Delivered trend-based reels, seasonal product campaigns, and a consistent visual identity that drove organic reach and audience interaction.',
     result: 'Higher Reach & Engagement',
     bg: 'linear-gradient(145deg, #2D1E0F 0%, #1A1108 50%, #0A0A0A 100%)',
+    image: '/work-cafe.jpeg',
     accentColor: '#C9A96E',
     size: 'large',
   },
@@ -40,6 +41,8 @@ const projects = [
       'Boosted brand awareness through creative food content, culturally relevant storytelling, and community-driven campaigns — including Ramadan promotions and seasonal food festival activations.',
     result: 'Higher Story & Reel Interaction',
     bg: 'linear-gradient(145deg, #2A1010 0%, #1A0808 50%, #0A0A0A 100%)',
+    image: '/work-restaurant.jpeg',
+    video: '/work-restaurant.mp4',
     accentColor: '#C97A6E',
     size: 'small',
   },
@@ -84,16 +87,33 @@ function ProjectCard({ project, index }) {
           background: project.bg,
           transform: hovered ? 'scale(1.04)' : 'scale(1)',
         }}
-      />
+      >
+        {project.video ? (
+          <video
+            src={project.video}
+            poster={project.image}
+            autoPlay muted loop playsInline
+            className="absolute inset-0 w-full h-full object-cover opacity-60"
+          />
+        ) : project.image ? (
+          <img
+            src={project.image}
+            alt={project.name}
+            className="absolute inset-0 w-full h-full object-cover opacity-60"
+          />
+        ) : null}
+      </div>
 
-      {/* Grid texture */}
-      <div
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`,
-          backgroundSize: '32px 32px',
-        }}
-      />
+      {/* Grid texture — only shown when no image */}
+      {!project.image && !project.video && (
+        <div
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`,
+            backgroundSize: '32px 32px',
+          }}
+        />
+      )}
 
       {/* Gradient overlay bottom */}
       <div className="absolute inset-0 project-card-overlay" />
