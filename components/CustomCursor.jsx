@@ -36,16 +36,16 @@ export default function CustomCursor() {
 
     const handleHover = (e) => {
       const el = e.target;
-      if (
+      if (el.closest('[data-cursor="view"]')) {
+        setCursorState('view');
+        setLabel('View');
+      } else if (
         el.closest('a') ||
         el.closest('button') ||
         el.closest('[data-cursor="hover"]')
       ) {
         setCursorState('hover');
         setLabel('');
-      } else if (el.closest('[data-cursor="view"]')) {
-        setCursorState('view');
-        setLabel('View');
       } else {
         setCursorState('default');
         setLabel('');
