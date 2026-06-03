@@ -11,14 +11,12 @@ import Skills from '../components/sections/Skills';
 import Testimonials from '../components/sections/Testimonials';
 import Contact from '../components/sections/Contact';
 
-const CustomCursor = dynamic(() => import('../components/CustomCursor'), { ssr: false });
 const Loader = dynamic(() => import('../components/Loader'), { ssr: false });
 
 export default function Page() {
   return (
     <SmoothScroll>
       <Loader />
-      <CustomCursor />
       <ScrollProgress />
       <Navigation />
       <div className="noise-overlay" aria-hidden="true" />

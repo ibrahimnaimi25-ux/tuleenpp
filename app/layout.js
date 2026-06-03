@@ -1,5 +1,8 @@
 import { Cormorant, Inter } from 'next/font/google';
 import './globals.css';
+import dynamic from 'next/dynamic';
+
+const CustomCursor = dynamic(() => import('../components/CustomCursor'), { ssr: false });
 
 const cormorant = Cormorant({
   subsets: ['latin'],
@@ -31,6 +34,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
       <body className="bg-black text-cream font-sans overflow-x-hidden">
+        <CustomCursor />
         {children}
       </body>
     </html>
