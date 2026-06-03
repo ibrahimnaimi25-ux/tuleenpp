@@ -118,10 +118,21 @@ export default function ProjectPage({ params }) {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.65, duration: 0.8 }}
-            className="font-sans text-sm text-cream-muted font-light max-w-md leading-[1.8]"
+            className="font-sans text-sm text-cream-muted font-light max-w-md leading-[1.8] mb-8"
           >
             {project.description}
           </motion.p>
+
+          {project.logo && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.7 }}
+              className="inline-flex items-center gap-3 px-4 py-2.5 border border-white/10 bg-black/40 backdrop-blur-sm"
+            >
+              <img src={project.logo} alt="Agency logo" className="h-6 w-auto object-contain brightness-[2] grayscale" />
+            </motion.div>
+          )}
         </motion.div>
 
         {/* Scroll hint */}
@@ -243,8 +254,61 @@ export default function ProjectPage({ params }) {
           </motion.div>
         </div>
 
-        {/* ── MEDIA SECTION ── */}
-        {(project.image || project.video) && (
+        {/* ── GALLERY ── */}
+        {(project.gallery?.length > 0 || project.video) && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="mb-24 md:mb-32"
+          >
+            <div className="flex items-center gap-4 mb-10">
+              <div className="w-10 h-[1px]" style={{ background: project.accentColor }} />
+              <span className="font-sans text-[10px] tracking-[0.4em] uppercase text-cream-muted">Work Samples</span>
+            </div>
+
+            {/* Gallery grid */}
+            {project.gallery?.length > 0 && (
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                {project.gallery.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08, duration: 0.6 }}
+                    className="group relative overflow-hidden border border-white/[0.06] aspect-[4/3] bg-[#0D0D0D]"
+                  >
+                    <img
+                      src={item.src}
+                      alt={item.caption}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                      <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-cream-muted">{item.caption}</p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            )}
+
+            {/* Video */}
+            {project.video && (
+              <div className="relative overflow-hidden border border-white/[0.06] aspect-video bg-black">
+                <video
+                  src={project.video}
+                  poster={project.image}
+                  controls playsInline preload="metadata"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
+          </motion.div>
+        )}
+
+        {/* Single image fallback (no gallery, no video) */}
+        {!project.gallery?.length && !project.video && project.image && (
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -256,29 +320,8 @@ export default function ProjectPage({ params }) {
               <div className="w-10 h-[1px]" style={{ background: project.accentColor }} />
               <span className="font-sans text-[10px] tracking-[0.4em] uppercase text-cream-muted">Work Sample</span>
             </div>
-
-            <div className={`grid gap-4 ${project.video && project.image ? 'lg:grid-cols-2' : 'grid-cols-1 max-w-3xl'}`}>
-              {project.image && (
-                <div className="relative overflow-hidden border border-white/[0.06] aspect-video group">
-                  <img
-                    src={project.image}
-                    alt={project.name}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                  />
-                </div>
-              )}
-              {project.video && (
-                <div className="relative overflow-hidden border border-white/[0.06] aspect-video bg-black">
-                  <video
-                    src={project.video}
-                    poster={project.image}
-                    controls
-                    playsInline
-                    preload="metadata"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              )}
+            <div className="relative overflow-hidden border border-white/[0.06] aspect-video group max-w-3xl">
+              <img src={project.image} alt={project.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
             </div>
           </motion.div>
         )}
