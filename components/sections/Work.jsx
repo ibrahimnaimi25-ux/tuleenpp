@@ -35,22 +35,22 @@ function ProjectCard({ project, index }) {
         >
           {project.video ? (
             <>
-              {/* Mobile: show poster image if available, else gradient */}
-              {project.image ? (
+              {/* Poster image fallback for projects that have one (e.g. restaurant) */}
+              {project.image && (
                 <img
                   src={project.image}
                   alt={project.name}
-                  className="absolute inset-0 w-full h-full object-cover opacity-60 md:hidden"
+                  className="absolute inset-0 w-full h-full object-cover opacity-60"
                 />
-              ) : (
-                <div className="absolute inset-0 md:hidden" style={{ background: project.bg }} />
               )}
-              {/* Desktop: autoplay video */}
+              {/* Video plays on all screens — muted autoplay works on modern mobile */}
               <video
                 src={project.video}
                 poster={project.image}
                 autoPlay muted loop playsInline
-                className="absolute inset-0 w-full h-full object-cover opacity-60 hidden md:block"
+                webkit-playsinline="true"
+                preload="none"
+                className="absolute inset-0 w-full h-full object-cover opacity-60"
               />
             </>
           ) : project.logoCard ? (
