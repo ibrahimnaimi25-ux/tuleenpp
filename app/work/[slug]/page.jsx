@@ -70,6 +70,10 @@ export default function ProjectPage({ params }) {
                 className="absolute inset-0 w-full h-full object-cover opacity-50 hidden md:block"
               />
             </>
+          ) : project.logoCard ? (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <img src={project.image} alt={project.name} className="w-48 md:w-64 object-contain drop-shadow-2xl opacity-20" />
+            </div>
           ) : project.image ? (
             <img
               src={project.image}

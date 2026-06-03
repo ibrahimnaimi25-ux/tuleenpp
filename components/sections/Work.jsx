@@ -40,6 +40,14 @@ function ProjectCard({ project, index }) {
               autoPlay muted loop playsInline
               className="absolute inset-0 w-full h-full object-cover opacity-60"
             />
+          ) : project.logoCard ? (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <img
+                src={project.image}
+                alt={project.name}
+                className="w-40 md:w-52 object-contain drop-shadow-2xl"
+              />
+            </div>
           ) : project.image ? (
             <img
               src={project.image}
