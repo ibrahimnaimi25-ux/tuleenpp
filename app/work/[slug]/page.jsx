@@ -307,8 +307,8 @@ export default function ProjectPage({ params }) {
               </div>
             )}
 
-            {/* Video */}
-            {project.video && (
+            {/* Video — only show standalone if NOT already in gallery */}
+            {project.video && !project.gallery?.some(g => g.video === project.video) && (
               <div className="relative overflow-hidden border border-white/[0.06] aspect-video bg-black">
                 <video
                   src={project.video}
