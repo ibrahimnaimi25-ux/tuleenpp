@@ -23,7 +23,7 @@ function ProjectCard({ project, index }) {
         className="relative overflow-hidden group cursor-pointer"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        style={{ aspectRatio: isLarge ? '16/10' : '4/3' }}
+        style={{ aspectRatio: isLarge ? (project.slug === 'modeling' ? '21/9' : '16/10') : '4/3' }}
       >
         {/* Background */}
         <div
@@ -112,7 +112,8 @@ export default function Work() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   const largeProjects = projects.filter((_, i) => i < 2).map((p) => ({ ...p, size: 'large' }));
-  const smallProjects = projects.filter((_, i) => i >= 2).map((p) => ({ ...p, size: 'small' }));
+  const smallProjects = projects.filter((_, i) => i >= 2 && i < 4).map((p) => ({ ...p, size: 'small' }));
+  const featuredProject = projects[4] ? { ...projects[4], size: 'large' } : null;
 
   return (
     <section id="work" className="relative bg-[#080808] py-32 md:py-44 overflow-hidden">
@@ -166,11 +167,16 @@ export default function Work() {
         </div>
 
         {/* Small projects row */}
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 gap-4 mb-4">
           {smallProjects.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i + 2} />
           ))}
         </div>
+
+        {/* Featured full-width: Modeling */}
+        {featuredProject && (
+          <ProjectCard key={featuredProject.id} project={featuredProject} index={4} />
+        )}
       </div>
     </section>
   );

@@ -270,7 +270,7 @@ export default function ProjectPage({ params }) {
 
             {/* Gallery grid */}
             {project.gallery?.length > 0 && (
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+              <div className="grid sm:grid-cols-2 gap-4 mb-4">
                 {project.gallery.map((item, i) => (
                   <motion.div
                     key={i}
@@ -278,16 +278,26 @@ export default function ProjectPage({ params }) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.08, duration: 0.6 }}
-                    className="group relative overflow-hidden border border-white/[0.06] aspect-[4/3] bg-[#0D0D0D]"
+                    className="group relative overflow-hidden border border-white/[0.06] aspect-video bg-[#0D0D0D]"
                   >
-                    <img
-                      src={item.src}
-                      alt={item.caption}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                      <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-cream-muted">{item.caption}</p>
-                    </div>
+                    {item.video ? (
+                      <video
+                        src={item.video}
+                        controls playsInline preload="metadata"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <>
+                        <img
+                          src={item.src}
+                          alt={item.caption}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                          <p className="font-sans text-[10px] tracking-[0.2em] uppercase text-cream-muted">{item.caption}</p>
+                        </div>
+                      </>
+                    )}
                   </motion.div>
                 ))}
               </div>
