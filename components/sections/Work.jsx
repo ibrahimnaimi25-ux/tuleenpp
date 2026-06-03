@@ -35,8 +35,16 @@ function ProjectCard({ project, index }) {
         >
           {project.video ? (
             <>
-              {/* Mobile: gradient bg only — video autoplay unreliable on mobile */}
-              <div className="absolute inset-0 md:hidden" style={{ background: project.bg }} />
+              {/* Mobile: show poster image if available, else gradient */}
+              {project.image ? (
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  className="absolute inset-0 w-full h-full object-cover opacity-60 md:hidden"
+                />
+              ) : (
+                <div className="absolute inset-0 md:hidden" style={{ background: project.bg }} />
+              )}
               {/* Desktop: autoplay video */}
               <video
                 src={project.video}
