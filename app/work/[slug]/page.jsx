@@ -289,7 +289,11 @@ export default function ProjectPage({ params }) {
                     {item.video ? (
                       <video
                         src={item.video}
-                        controls playsInline preload="auto"
+                        controls
+                        playsInline
+                        webkit-playsinline="true"
+                        x-webkit-airplay="allow"
+                        preload="auto"
                         className="w-full h-full object-cover bg-[#111]"
                       />
                     ) : (
@@ -315,7 +319,11 @@ export default function ProjectPage({ params }) {
                 <video
                   src={project.video}
                   poster={project.image}
-                  controls playsInline preload="auto"
+                  controls
+                  playsInline
+                  webkit-playsinline="true"
+                  x-webkit-airplay="allow"
+                  preload="auto"
                   className="w-full h-full object-cover"
                 />
               </div>
