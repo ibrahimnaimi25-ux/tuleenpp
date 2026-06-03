@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { getProject, getAdjacentProjects } from '../../../lib/projects';
+import { AutoplayVideo, ControlsVideo } from '../../../components/ui/VideoPlayer';
 import { notFound } from 'next/navigation';
 
 export default function ProjectPage({ params }) {
@@ -56,19 +57,15 @@ export default function ProjectPage({ params }) {
         <div className="absolute inset-0" style={{ background: project.bg }}>
           {project.video ? (
             <>
-              {/* Mobile: show poster image if available, otherwise just gradient bg */}
+              {/* Mobile: poster image fallback if available */}
               {project.image && (
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="absolute inset-0 w-full h-full object-cover opacity-50 md:hidden"
-                />
+                <img src={project.image} alt={project.name}
+                  className="absolute inset-0 w-full h-full object-cover opacity-50 md:hidden" />
               )}
-              {/* Desktop: play video */}
-              <video
+              {/* Desktop: iOS-safe autoplay */}
+              <AutoplayVideo
                 src={project.video}
                 poster={project.image}
-                autoPlay muted loop playsInline preload="none"
                 className="absolute inset-0 w-full h-full object-cover opacity-50 hidden md:block"
               />
             </>
@@ -287,13 +284,8 @@ export default function ProjectPage({ params }) {
                     className={`group relative overflow-hidden border border-white/[0.06] ${project.portraitGallery ? 'aspect-[9/16] bg-white' : 'aspect-video bg-[#0D0D0D]'}`}
                   >
                     {item.video ? (
-                      <video
+                      <ControlsVideo
                         src={item.video}
-                        controls
-                        playsInline
-                        webkit-playsinline="true"
-                        x-webkit-airplay="allow"
-                        preload="auto"
                         className="w-full h-full object-cover bg-[#111]"
                       />
                     ) : (
@@ -316,14 +308,9 @@ export default function ProjectPage({ params }) {
             {/* Video — only show standalone if NOT already in gallery */}
             {project.video && !project.gallery?.some(g => g.video === project.video) && (
               <div className="relative overflow-hidden border border-white/[0.06] aspect-video bg-black">
-                <video
+                <ControlsVideo
                   src={project.video}
                   poster={project.image}
-                  controls
-                  playsInline
-                  webkit-playsinline="true"
-                  x-webkit-airplay="allow"
-                  preload="auto"
                   className="w-full h-full object-cover"
                 />
               </div>

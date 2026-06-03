@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
 import { projects } from '../../lib/projects';
+import { AutoplayVideo } from '../ui/VideoPlayer';
 
 function ProjectCard({ project, index }) {
   const ref = useRef(null);
@@ -34,25 +35,11 @@ function ProjectCard({ project, index }) {
           }}
         >
           {project.video ? (
-            <>
-              {/* Poster image fallback for projects that have one (e.g. restaurant) */}
-              {project.image && (
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="absolute inset-0 w-full h-full object-cover opacity-60"
-                />
-              )}
-              {/* Video plays on all screens — muted autoplay works on modern mobile */}
-              <video
-                src={project.video}
-                poster={project.image}
-                autoPlay muted loop playsInline
-                webkit-playsinline="true"
-                preload="none"
-                className="absolute inset-0 w-full h-full object-cover opacity-60"
-              />
-            </>
+            <AutoplayVideo
+              src={project.video}
+              poster={project.image}
+              className="absolute inset-0 w-full h-full object-cover opacity-60"
+            />
           ) : project.logoCard ? (
             <div className="absolute inset-0 flex items-center justify-center">
               <img
