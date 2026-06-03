@@ -56,19 +56,11 @@ export default function ProjectPage({ params }) {
         {/* Background layer */}
         <div className="absolute inset-0" style={{ background: project.bg }}>
           {project.video ? (
-            <>
-              {/* Mobile: poster image fallback if available */}
-              {project.image && (
-                <img src={project.image} alt={project.name}
-                  className="absolute inset-0 w-full h-full object-cover opacity-50 md:hidden" />
-              )}
-              {/* Desktop: iOS-safe autoplay */}
-              <AutoplayVideo
-                src={project.video}
-                poster={project.image}
-                className="absolute inset-0 w-full h-full object-cover opacity-50 hidden md:block"
-              />
-            </>
+            <AutoplayVideo
+              src={project.video}
+              poster={project.image}
+              className="absolute inset-0 w-full h-full object-cover opacity-50"
+            />
           ) : project.logoCard ? (
             <div className="absolute inset-0 flex items-center justify-center">
               <img src={project.image} alt={project.name} className="w-48 md:w-64 object-contain drop-shadow-2xl opacity-20" />
