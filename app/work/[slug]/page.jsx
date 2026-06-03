@@ -56,12 +56,14 @@ export default function ProjectPage({ params }) {
         <div className="absolute inset-0" style={{ background: project.bg }}>
           {project.video ? (
             <>
-              {/* Mobile: show poster image only — 61MB video is too heavy for mobile */}
-              <img
-                src={project.image}
-                alt={project.name}
-                className="absolute inset-0 w-full h-full object-cover opacity-50 md:hidden"
-              />
+              {/* Mobile: show poster image if available, otherwise just gradient bg */}
+              {project.image && (
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  className="absolute inset-0 w-full h-full object-cover opacity-50 md:hidden"
+                />
+              )}
               {/* Desktop: play video */}
               <video
                 src={project.video}
@@ -287,8 +289,8 @@ export default function ProjectPage({ params }) {
                     {item.video ? (
                       <video
                         src={item.video}
-                        controls playsInline preload="metadata"
-                        className="w-full h-full object-cover"
+                        controls playsInline preload="auto"
+                        className="w-full h-full object-cover bg-[#111]"
                       />
                     ) : (
                       <>
@@ -313,7 +315,7 @@ export default function ProjectPage({ params }) {
                 <video
                   src={project.video}
                   poster={project.image}
-                  controls playsInline preload="metadata"
+                  controls playsInline preload="auto"
                   className="w-full h-full object-cover"
                 />
               </div>

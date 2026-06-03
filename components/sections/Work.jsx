@@ -34,12 +34,17 @@ function ProjectCard({ project, index }) {
           }}
         >
           {project.video ? (
-            <video
-              src={project.video}
-              poster={project.image}
-              autoPlay muted loop playsInline
-              className="absolute inset-0 w-full h-full object-cover opacity-60"
-            />
+            <>
+              {/* Mobile: gradient bg only — video autoplay unreliable on mobile */}
+              <div className="absolute inset-0 md:hidden" style={{ background: project.bg }} />
+              {/* Desktop: autoplay video */}
+              <video
+                src={project.video}
+                poster={project.image}
+                autoPlay muted loop playsInline
+                className="absolute inset-0 w-full h-full object-cover opacity-60 hidden md:block"
+              />
+            </>
           ) : project.logoCard ? (
             <div className="absolute inset-0 flex items-center justify-center">
               <img
