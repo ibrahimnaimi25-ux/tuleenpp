@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 
 const stats = [
   { value: '10+', label: 'Brands Elevated' },
@@ -31,6 +31,117 @@ function StatCard({ value, label, index }) {
       </p>
       <p className="font-sans text-[11px] text-cream-muted tracking-[0.2em] uppercase">{label}</p>
     </motion.div>
+  );
+}
+
+function GraduationBlock() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      {/* Two-column: photo left, card right — stacked on mobile */}
+      <div className="grid sm:grid-cols-[auto_1fr] gap-4 items-stretch">
+        {/* Graduation photo */}
+        <button
+          onClick={() => setOpen(true)}
+          className="group relative overflow-hidden border border-white/[0.06] hover:border-gold/30 transition-colors duration-500 focus:outline-none"
+          style={{ width: '120px', minHeight: '150px' }}
+          aria-label="View graduation photo"
+        >
+          <img
+            src="/tuleen-graduation.jpeg"
+            alt="Tuleen Rezek — Graduation"
+            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            style={{ display: 'block' }}
+          />
+          {/* Corner marks */}
+          <div className="absolute top-2 left-2 w-4 h-4 border-t border-l border-gold/40 pointer-events-none" />
+          <div className="absolute top-2 right-2 w-4 h-4 border-t border-r border-gold/40 pointer-events-none" />
+          <div className="absolute bottom-2 left-2 w-4 h-4 border-b border-l border-gold/40 pointer-events-none" />
+          <div className="absolute bottom-2 right-2 w-4 h-4 border-b border-r border-gold/40 pointer-events-none" />
+          {/* Hover hint */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/40 backdrop-blur-[2px]">
+            <span className="font-sans text-[9px] tracking-[0.25em] uppercase text-gold border border-gold/40 px-2 py-1">
+              View
+            </span>
+          </div>
+        </button>
+
+        {/* Education card */}
+        <div className="border border-white/[0.06] bg-[#0D0D0D] px-5 py-4 hover:border-gold/20 transition-colors duration-500 flex flex-col justify-center">
+          <p className="font-sans text-sm font-light text-cream mb-1">
+            Princess Sumaya University for Technology
+          </p>
+          <p className="font-sans text-[11px] text-gold/80 tracking-[0.1em] mb-2">
+            Bachelor of E-Marketing & Social Media
+          </p>
+          <p className="font-sans text-[10px] text-cream-muted tracking-[0.2em] uppercase mb-3">
+            Graduated · 2025
+          </p>
+          <div className="flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-gold/60" />
+            <span className="font-sans text-[10px] text-cream-muted">Princess Sumaya University · Amman, Jordan</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Lightbox */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setOpen(false)}
+          >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" />
+
+            {/* Image */}
+            <motion.div
+              className="relative max-w-sm w-full border border-white/10"
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.94, opacity: 0 }}
+              transition={{ duration: 0.35, ease: [0.76, 0, 0.24, 1] }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Corner marks */}
+              <div className="absolute top-3 left-3 w-5 h-5 border-t border-l border-gold/50 z-10 pointer-events-none" />
+              <div className="absolute top-3 right-3 w-5 h-5 border-t border-r border-gold/50 z-10 pointer-events-none" />
+              <div className="absolute bottom-3 left-3 w-5 h-5 border-b border-l border-gold/50 z-10 pointer-events-none" />
+              <div className="absolute bottom-3 right-3 w-5 h-5 border-b border-r border-gold/50 z-10 pointer-events-none" />
+
+              <img
+                src="/tuleen-graduation.jpeg"
+                alt="Tuleen Rezek — Graduation"
+                className="w-full object-cover block"
+              />
+
+              {/* Caption bar */}
+              <div className="bg-black/60 backdrop-blur-sm px-5 py-3 border-t border-white/[0.06]">
+                <p className="font-sans text-[10px] tracking-[0.3em] uppercase text-cream-muted">
+                  Tuleen Rezek · Princess Sumaya University · 2025
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Close button */}
+            <button
+              onClick={() => setOpen(false)}
+              className="absolute top-6 right-6 w-9 h-9 border border-white/20 flex items-center justify-center text-cream-muted hover:border-gold/40 hover:text-gold transition-all duration-300"
+              aria-label="Close"
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              </svg>
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
@@ -189,17 +300,7 @@ export default function About() {
               <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-cream-muted">
                 Education
               </p>
-              <div className="border border-white/[0.06] bg-[#0D0D0D] px-5 py-4 hover:border-gold/20 transition-colors duration-500">
-                <p className="font-sans text-sm font-light text-cream mb-1">
-                  Princess Sumaya University for Technology
-                </p>
-                <p className="font-sans text-[11px] text-gold/80 tracking-[0.1em] mb-1">
-                  Bachelor of E-Marketing & Social Media
-                </p>
-                <p className="font-sans text-[10px] text-cream-muted tracking-[0.2em] uppercase">
-                  Expected Graduation · 2026
-                </p>
-              </div>
+              <GraduationBlock />
             </motion.div>
 
             {/* Download CV */}
