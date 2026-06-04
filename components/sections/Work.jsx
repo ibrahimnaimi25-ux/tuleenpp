@@ -41,12 +41,56 @@ function ProjectCard({ project, index }) {
               className="absolute inset-0 w-full h-full object-cover opacity-60"
             />
           ) : project.logoCard ? (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <img
-                src={project.image}
-                alt={project.name}
-                className="w-40 md:w-52 object-contain drop-shadow-2xl"
-              />
+            <div className="absolute inset-0 overflow-hidden">
+              {/* Abstract recycling SVG watermark */}
+              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" fill="none">
+                <circle cx="300" cy="200" r="280" stroke="rgba(201,169,110,0.07)" strokeWidth="0.8"/>
+                <circle cx="300" cy="200" r="190" stroke="rgba(76,175,125,0.07)" strokeWidth="0.6"/>
+                <circle cx="300" cy="200" r="100" stroke="rgba(201,169,110,0.05)" strokeWidth="0.5"/>
+                {/* Recycling arc A */}
+                <path d="M220 130 A100 100 0 0 1 380 130" stroke="rgba(76,175,125,0.14)" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+                <polygon points="218,118 210,136 228,132" fill="rgba(76,175,125,0.14)"/>
+                {/* Recycling arc B */}
+                <path d="M380 130 A100 100 0 0 1 300 270" stroke="rgba(76,175,125,0.14)" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+                <polygon points="308,272 296,284 294,266" fill="rgba(76,175,125,0.14)"/>
+                {/* Recycling arc C */}
+                <path d="M300 270 A100 100 0 0 1 220 130" stroke="rgba(76,175,125,0.14)" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+                <polygon points="222,142 212,126 230,128" fill="rgba(76,175,125,0.14)"/>
+                {/* Outer glow ring */}
+                <circle cx="300" cy="200" r="360" stroke="rgba(76,175,125,0.03)" strokeWidth="60" fill="none"/>
+              </svg>
+
+              {/* Dot grid texture */}
+              <div className="absolute inset-0" style={{
+                backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px)',
+                backgroundSize: '22px 22px',
+                opacity: 0.6,
+              }}/>
+
+              {/* Horizontal gold rule lines */}
+              <div className="absolute left-10 right-10" style={{ top: '33%', height: '0.5px', background: 'linear-gradient(90deg, transparent, rgba(201,169,110,0.22), transparent)' }}/>
+              <div className="absolute left-10 right-10" style={{ bottom: '33%', height: '0.5px', background: 'linear-gradient(90deg, transparent, rgba(201,169,110,0.22), transparent)' }}/>
+
+              {/* Logo — white silhouette on dark, no white box */}
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                <img
+                  src={project.image}
+                  alt={project.name}
+                  className="w-28 md:w-36 object-contain"
+                  style={{ filter: 'brightness(0) invert(1)', opacity: 0.92 }}
+                />
+                {/* Thin gold separator */}
+                <div style={{ width: '48px', height: '0.5px', background: 'linear-gradient(90deg, transparent, rgba(201,169,110,0.7), transparent)' }}/>
+                <p style={{ fontFamily: 'inherit', fontSize: '9px', letterSpacing: '0.38em', textTransform: 'uppercase', color: 'rgba(201,169,110,0.65)' }}>
+                  Recycling Rewards App
+                </p>
+              </div>
+
+              {/* Corner accent marks */}
+              <div className="absolute top-4 left-4 w-5 h-5 border-t border-l pointer-events-none" style={{ borderColor: 'rgba(201,169,110,0.3)' }}/>
+              <div className="absolute top-4 right-4 w-5 h-5 border-t border-r pointer-events-none" style={{ borderColor: 'rgba(201,169,110,0.3)' }}/>
+              <div className="absolute bottom-[72px] left-4 w-5 h-5 border-b border-l pointer-events-none" style={{ borderColor: 'rgba(201,169,110,0.3)' }}/>
+              <div className="absolute bottom-[72px] right-4 w-5 h-5 border-b border-r pointer-events-none" style={{ borderColor: 'rgba(201,169,110,0.3)' }}/>
             </div>
           ) : project.image ? (
             <img
