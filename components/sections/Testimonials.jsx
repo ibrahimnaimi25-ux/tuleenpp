@@ -2,39 +2,9 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { content } from '../../lib/content';
 
-const steps = [
-  {
-    number: '01',
-    title: 'Research',
-    description: 'Understanding the audience, competitors, trends, and brand positioning to build a solid strategic foundation.',
-    color: '#C9A96E',
-  },
-  {
-    number: '02',
-    title: 'Strategy',
-    description: 'Building content directions and campaign ideas aligned with business goals and audience behaviour.',
-    color: '#7DA5C9',
-  },
-  {
-    number: '03',
-    title: 'Content Creation',
-    description: 'Designing visuals, creating reels concepts, writing captions, and planning the full execution timeline.',
-    color: '#86C99A',
-  },
-  {
-    number: '04',
-    title: 'Launch & Management',
-    description: 'Publishing content, managing campaigns, and monitoring engagement across all active platforms.',
-    color: '#D4A853',
-  },
-  {
-    number: '05',
-    title: 'Optimization',
-    description: 'Reviewing performance and refining future content based on real audience behaviour and data insights.',
-    color: '#C9A9C9',
-  },
-];
+const steps = content.process.steps;
 
 function StepCard({ step, index }) {
   const ref = useRef(null);

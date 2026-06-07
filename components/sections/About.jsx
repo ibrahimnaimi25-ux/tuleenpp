@@ -2,18 +2,9 @@
 
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { content } from '../../lib/content';
 
-const stats = [
-  { value: '10+', label: 'Brands Elevated' },
-  { value: '5', label: 'Industries Covered' },
-  { value: '2+', label: 'Years of Craft' },
-  { value: '100%', label: 'Strategy-Driven' },
-];
-
-const expertise = [
-  'Social Media Strategy', 'Content Creation', 'Campaign Planning',
-  'Paid Advertising', 'Brand Storytelling', 'Creative Marketing',
-];
+const { about } = content;
 
 function StatCard({ value, label, index }) {
   const ref = useRef(null);
@@ -70,17 +61,17 @@ function GraduationBlock() {
         {/* Education card */}
         <div className="border border-white/[0.06] bg-[#0D0D0D] px-5 py-4 hover:border-gold/20 transition-colors duration-500 flex flex-col justify-center">
           <p className="font-sans text-sm font-light text-cream mb-1">
-            Princess Sumaya University for Technology
+            {about.education.university}
           </p>
           <p className="font-sans text-[11px] text-gold/80 tracking-[0.1em] mb-2">
-            Bachelor of E-Marketing & Social Media
+            {about.education.degree}
           </p>
           <p className="font-sans text-[10px] text-cream-muted tracking-[0.2em] uppercase mb-3">
-            Graduated · 2025
+            {about.education.status}
           </p>
           <div className="flex items-center gap-2">
             <div className="w-1.5 h-1.5 rounded-full bg-gold/60" />
-            <span className="font-sans text-[10px] text-cream-muted">Princess Sumaya University · Amman, Jordan</span>
+            <span className="font-sans text-[10px] text-cream-muted">{about.education.location}</span>
           </div>
         </div>
       </div>
@@ -209,7 +200,7 @@ export default function About() {
 
             {/* Stats grid */}
             <div className="grid grid-cols-2 gap-3">
-              {stats.map((stat, i) => (
+              {about.stats.map((stat, i) => (
                 <StatCard key={i} {...stat} index={i} />
               ))}
             </div>
@@ -235,21 +226,7 @@ export default function About() {
               transition={{ delay: 0.3, duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
               className="space-y-5 text-cream-muted font-sans text-base leading-[1.9] font-light max-w-xl"
             >
-              <p>
-                I'm Tuleen — a digital marketing and social media strategist with hands-on experience
-                working with Jordanian brands across food, hospitality, beauty, lifestyle, and
-                service industries.
-              </p>
-              <p>
-                My work combines creative storytelling with strategic marketing to help brands build
-                stronger online identities, engage audiences, and create content people actually
-                connect with.
-              </p>
-              <p>
-                Through agency internships and freelance projects, I've worked on social media
-                management, campaign planning, content creation, paid advertising, brand activations,
-                and audience engagement strategies.
-              </p>
+              {about.bio.map((para, i) => <p key={i}>{para}</p>)}
             </motion.div>
 
             {/* Divider */}
@@ -271,7 +248,7 @@ export default function About() {
                 Focus Areas
               </p>
               <div className="flex flex-wrap gap-2.5">
-                {expertise.map((item, i) => (
+                {about.expertise.map((item, i) => (
                   <span
                     key={i}
                     className="font-sans text-[11px] tracking-[0.15em] uppercase text-cream-muted border border-white/[0.08] px-3.5 py-1.5 hover:border-gold/40 hover:text-cream transition-all duration-300"

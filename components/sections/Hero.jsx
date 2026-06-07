@@ -3,8 +3,9 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import MagneticButton from '../ui/MagneticButton';
+import { content } from '../../lib/content';
 
-const marqueeText = 'SOCIAL MEDIA STRATEGY · CONTENT CREATION · CAMPAIGN PLANNING · PAID ADVERTISING · BRAND STORYTELLING · CREATIVE MARKETING · ';
+const { hero } = content;
 
 const scrollTo = (href) => {
   const el = document.querySelector(href);
@@ -17,13 +18,6 @@ export default function Hero() {
   const textY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
   const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-
-  const headlineLines = [
-    { text: 'Digital', italic: false, delay: 0.2 },
-    { text: 'Marketing', italic: true, delay: 0.36 },
-    { text: '& Social', italic: false, delay: 0.52 },
-    { text: 'Strategy.', italic: false, delay: 0.68, gold: true },
-  ];
 
   return (
     <section
@@ -83,13 +77,13 @@ export default function Hero() {
         >
           <div className="hr-gold" />
           <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">
-            Marketing Portfolio · 2025
+            {hero.eyebrow}
           </span>
         </motion.div>
 
         {/* Headline */}
         <div className="mb-10 md:mb-14">
-          {headlineLines.map((line, i) => (
+          {hero.headline.map((line, i) => (
             <div key={i} className="clip-reveal overflow-hidden">
               <motion.h1
                 initial={{ y: '105%' }}
@@ -114,10 +108,9 @@ export default function Hero() {
           transition={{ delay: 3.0, duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
           className="flex flex-col sm:flex-row items-start sm:items-center gap-8 sm:gap-14"
         >
-          <p className="font-sans text-cream-muted text-sm leading-[1.8] max-w-[240px] font-light">
-            Helping brands create<br />
-            engaging digital experiences<br />
-            through strategy-driven content.
+          <p className="font-sans text-cream-muted text-sm leading-[1.8] max-w-[240px] font-light"
+            style={{ whiteSpace: 'pre-line' }}>
+            {hero.tagline}
           </p>
 
           <div className="flex items-center gap-5">
@@ -156,7 +149,7 @@ export default function Hero() {
       <div className="relative z-10 border-t border-white/[0.05] py-4 overflow-hidden">
         <div className="marquee-wrap">
           <div className="marquee-inner text-cream/[0.35] font-sans text-[10px] tracking-[0.4em] uppercase">
-            {marqueeText.repeat(6)}
+            {hero.marquee.repeat(6)}
           </div>
         </div>
       </div>

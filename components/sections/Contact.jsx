@@ -3,11 +3,9 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import MagneticButton from '../ui/MagneticButton';
+import { content } from '../../lib/content';
 
-const socials = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/tuleen-rezek-86b1b5297' },
-  { label: 'Instagram', href: 'https://www.instagram.com/yourusername' },
-];
+const { contact: c } = content;
 
 const inputClass =
   'w-full bg-white/[0.07] border border-white/30 text-cream font-sans text-sm font-light px-5 py-3.5 outline-none ' +
@@ -20,7 +18,7 @@ export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [status, setStatus] = useState('idle');
 
-  const email = 'tuleen.rezek23@gmail.com';
+  const email = c.email;
 
   const copyEmail = () => {
     navigator.clipboard?.writeText(email).then(() => {
@@ -168,15 +166,10 @@ export default function Contact() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-400" />
                 </span>
-                <span className="font-sans text-[11px] tracking-[0.3em] uppercase text-green-400">Available for Work</span>
+                <span className="font-sans text-[11px] tracking-[0.3em] uppercase text-green-400">{c.availabilityStatus}</span>
               </div>
               <div className="grid grid-cols-2 gap-x-6 gap-y-4">
-                {[
-                  { label: 'Based in', value: 'Amman, Jordan' },
-                  { label: 'Response', value: 'Within 24h' },
-                  { label: 'Open to', value: 'Remote Projects' },
-                  { label: 'Availability', value: 'Freelance & Full-time' },
-                ].map((item) => (
+                {c.availability.map((item) => (
                   <div key={item.label}>
                     <p className="font-sans text-[9px] tracking-[0.25em] uppercase text-cream-muted mb-1">{item.label}</p>
                     <p className="font-sans text-[12px] text-cream font-light">{item.value}</p>
@@ -204,14 +197,7 @@ export default function Contact() {
             <div className="py-6 border-b border-white/[0.06]">
               <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-cream-muted mb-4">What I Offer</p>
               <div className="grid grid-cols-1 gap-2">
-                {[
-                  'Social Media Strategy & Management',
-                  'Content Creation & Reels',
-                  'Campaign Planning & Execution',
-                  'Paid Advertising (Meta Ads)',
-                  'Brand Storytelling',
-                  'Creative Direction',
-                ].map((s, i) => (
+                {c.services.map((s, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <span className="text-gold text-[10px]">✦</span>
                     <span className="font-sans text-[12px] text-cream-muted font-light">{s}</span>
@@ -224,7 +210,7 @@ export default function Contact() {
             <div className="pt-6">
               <p className="font-sans text-[9px] tracking-[0.3em] uppercase text-cream-muted mb-4">Socials</p>
               <div className="flex gap-6">
-                {socials.map((s, i) => (
+                {c.socials.map((s, i) => (
                   <a key={i} href={s.href} target="_blank" rel="noopener noreferrer"
                     className="font-sans text-[11px] tracking-[0.25em] uppercase text-cream-muted hover:text-cream transition-colors duration-300 relative group w-fit">
                     {s.label}
@@ -244,7 +230,7 @@ export default function Contact() {
       <div className="border-t border-white/[0.04]">
         <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24 py-7 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="font-sans text-[10px] text-cream-muted tracking-[0.2em]">
-            © 2025 Tuleen Rezek — All rights reserved.
+            {c.footer}
           </p>
           <p className="font-sans text-[10px] text-cream-muted/40 tracking-[0.15em]">
             Digital Marketing · Social Media Strategy

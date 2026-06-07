@@ -2,50 +2,9 @@
 
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { content } from '../../lib/content';
 
-const skillCategories = [
-  {
-    title: 'Social Media Strategy',
-    icon: '◈',
-    color: '#C9A96E',
-    skills: ['Social Media Management', 'Platform Strategy', 'Audience Engagement', 'Content Calendars', 'Community Building'],
-  },
-  {
-    title: 'Content Creation',
-    icon: '◎',
-    color: '#86C99A',
-    skills: ['Reels Concepts', 'Caption Writing', 'Visual Storytelling', 'Trend-Based Content', 'Creative Direction'],
-  },
-  {
-    title: 'Digital Marketing',
-    icon: '◉',
-    color: '#7DA5C9',
-    skills: ['Marketing Strategy', 'Campaign Planning', 'Brand Positioning', 'Market Research', 'Audience Targeting'],
-  },
-  {
-    title: 'Paid Advertising',
-    icon: '⬡',
-    color: '#D4A853',
-    skills: ['Meta Ads', 'Sponsored Campaigns', 'Performance Monitoring', 'Reach Optimization', 'Budget Allocation'],
-  },
-  {
-    title: 'Branding Support',
-    icon: '◇',
-    color: '#C9A9C9',
-    skills: ['Tone of Voice', 'Visual Consistency', 'Launch Campaigns', 'Brand Storytelling', 'Brand Identity'],
-  },
-  {
-    title: 'Event Marketing',
-    icon: '△',
-    color: '#A9C9C9',
-    skills: ['Brand Activations', 'Experiential Marketing', 'Event Execution', 'Campaign Concepts', 'Team Collaboration'],
-  },
-];
-
-const tools = [
-  'Canva', 'Adobe Photoshop', 'Adobe Illustrator', 'Meta Business Suite',
-  'Google Analytics', 'HubSpot', 'Mailchimp',
-];
+const { skillCategories, tools } = content.skills;
 
 function SkillCard({ category, index }) {
   const ref = useRef(null);
