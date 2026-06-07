@@ -4,7 +4,7 @@ import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { content } from '../../lib/content';
 
-const { skillCategories, tools } = content.skills;
+const { categories: skillCategories, tools } = content.skills;
 
 function SkillCard({ category, index }) {
   const ref = useRef(null);
