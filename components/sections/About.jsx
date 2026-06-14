@@ -215,8 +215,18 @@ export default function About() {
                 transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
                 className="font-display font-light text-[6vw] sm:text-[4vw] md:text-[3.5vw] lg:text-[3vw] leading-[1.1] tracking-tight text-cream"
               >
-                Building brands that feel{' '}
-                <em className="text-gold not-italic italic">visually strong</em> and culturally relevant.
+                {(() => {
+                  const { heading, headingEmphasis } = about;
+                  const idx = heading.indexOf(headingEmphasis);
+                  if (idx === -1) return heading;
+                  return (
+                    <>
+                      {heading.slice(0, idx)}
+                      <em className="text-gold not-italic italic">{headingEmphasis}</em>
+                      {heading.slice(idx + headingEmphasis.length)}
+                    </>
+                  );
+                })()}
               </motion.h2>
             </div>
 
