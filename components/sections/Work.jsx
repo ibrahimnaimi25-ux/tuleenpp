@@ -24,7 +24,7 @@ function ProjectCard({ project, index }) {
         className="relative overflow-hidden group cursor-pointer"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        style={{ aspectRatio: isLarge ? (project.slug === 'modeling' ? '21/9' : '16/10') : '4/3' }}
+        style={{ aspectRatio: isLarge ? '16/10' : '4/3' }}
       >
         {/* Background */}
         <div

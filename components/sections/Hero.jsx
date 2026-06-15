@@ -132,6 +132,16 @@ export default function Hero() {
             </MagneticButton>
           </div>
         </motion.div>
+
+        {/* Subtext */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 3.3, duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+          className="hidden md:block font-sans text-cream-muted/70 text-sm leading-[1.8] font-light max-w-[420px] mt-8"
+        >
+          {hero.subtext}
+        </motion.p>
       </motion.div>
 
       {/* Scroll indicator — desktop only */}

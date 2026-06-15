@@ -71,7 +71,7 @@ export default function Contact() {
         {/* Headline row */}
         <div className="mb-12 md:mb-14">
           <div className="flex flex-wrap gap-x-4">
-            {["Let's build", 'something', 'remarkable.'].map((line, i) => (
+            {c.headline.map((line, i) => (
               <div key={i} className="overflow-hidden">
                 <motion.h2
                   initial={{ y: '105%' }}
@@ -79,7 +79,7 @@ export default function Contact() {
                   transition={{ delay: 0.1 + i * 0.1, duration: 1, ease: [0.76, 0, 0.24, 1] }}
                   className={`font-display font-light leading-[1.0] tracking-tight
                     text-[9vw] sm:text-[7vw] md:text-[5vw] lg:text-[4vw]
-                    ${i === 2 ? 'text-gold glow-text-gold italic' : 'text-cream'}
+                    ${i === c.headline.length - 1 ? 'text-gold glow-text-gold italic' : 'text-cream'}
                   `}
                 >
                   {line}
@@ -93,8 +93,7 @@ export default function Contact() {
             transition={{ delay: 0.45, duration: 0.7 }}
             className="font-sans text-sm text-cream-muted font-light max-w-md leading-relaxed mt-5"
           >
-            Interested in collaborations, freelance projects, or creative partnerships?
-            Fill in the form and I'll get back to you within 24 hours.
+            {c.intro}
           </motion.p>
         </div>
 
