@@ -41,7 +41,7 @@ export default function ProjectPage({ params }) {
         </Link>
         <div className="flex items-center gap-4">
           <span className="hidden sm:block font-sans text-[10px] tracking-[0.3em] uppercase text-cream-muted/50">
-            {project.id} of 05
+            {project.id} of 06
           </span>
           <div className="w-[1px] h-4 bg-white/10 hidden sm:block" />
           <span className="font-sans text-[10px] tracking-[0.25em] uppercase" style={{ color: project.accentColor }}>

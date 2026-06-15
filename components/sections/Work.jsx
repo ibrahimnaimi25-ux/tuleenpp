@@ -135,8 +135,7 @@ export default function Work() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   const largeProjects = projects.filter((_, i) => i < 2).map((p) => ({ ...p, size: 'large' }));
-  const smallProjects = projects.filter((_, i) => i >= 2 && i < 4).map((p) => ({ ...p, size: 'small' }));
-  const featuredProject = projects[4] ? { ...projects[4], size: 'large' } : null;
+  const smallProjects = projects.filter((_, i) => i >= 2).map((p) => ({ ...p, size: 'small' }));
 
   return (
     <section id="work" className="relative bg-[#080808] py-32 md:py-44 overflow-hidden">
@@ -189,17 +188,12 @@ export default function Work() {
           ))}
         </div>
 
-        {/* Small projects row */}
-        <div className="grid md:grid-cols-2 gap-4 mb-4">
+        {/* Small projects grid */}
+        <div className="grid md:grid-cols-2 gap-4">
           {smallProjects.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i + 2} />
           ))}
         </div>
-
-        {/* Featured full-width */}
-        {featuredProject && (
-          <ProjectCard key={featuredProject.id} project={featuredProject} index={4} />
-        )}
       </div>
     </section>
   );
