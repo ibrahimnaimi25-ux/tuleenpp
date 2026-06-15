@@ -105,7 +105,7 @@ export default function Skills() {
               className="flex items-center gap-4 mb-6"
             >
               <div className="hr-gold" />
-              <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">03 / Skills</span>
+              <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">04 / Skills</span>
             </motion.div>
             <div className="overflow-hidden">
               <motion.h2

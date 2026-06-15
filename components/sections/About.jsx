@@ -290,11 +290,62 @@ export default function About() {
               <GraduationBlock />
             </motion.div>
 
-            {/* Download CV */}
+            {/* Divider */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={rightInView ? { scaleX: 1 } : {}}
+              transition={{ delay: 0.85, duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+              className="w-full h-[1px] bg-gradient-to-r from-gold/40 to-transparent origin-left"
+            />
+
+            {/* Featured Achievements */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={rightInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.9, duration: 0.7 }}
+              className="space-y-4"
+            >
+              <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-cream-muted">
+                Featured Achievements
+              </p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {about.achievements.map((item, i) => (
+                  <div key={i} className="flex items-start gap-3">
+                    <span className="text-gold text-[11px] mt-0.5">✓</span>
+                    <span className="font-sans text-[12px] text-cream-muted font-light leading-relaxed">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Divider */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={rightInView ? { scaleX: 1 } : {}}
+              transition={{ delay: 0.95, duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+              className="w-full h-[1px] bg-gradient-to-r from-gold/40 to-transparent origin-left"
+            />
+
+            {/* Creative Experience */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={rightInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 1.0, duration: 0.7 }}
+              className="space-y-4"
+            >
+              <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-cream-muted">
+                Creative Experience
+              </p>
+              <div className="space-y-3 text-cream-muted font-sans text-sm leading-[1.9] font-light max-w-xl">
+                {about.creativeExperience.map((para, i) => <p key={i}>{para}</p>)}
+              </div>
+            </motion.div>
+
+            {/* Download CV */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={rightInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 1.05, duration: 0.7 }}
             >
               <a
                 href="/tuleen-cv.pdf"

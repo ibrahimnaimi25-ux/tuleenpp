@@ -81,7 +81,7 @@ export default function Process() {
               className="flex items-center gap-4 mb-6"
             >
               <div className="hr-gold" />
-              <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">04 / Process</span>
+              <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">05 / Process</span>
             </motion.div>
             <div className="overflow-hidden">
               <motion.h2
@@ -102,7 +102,7 @@ export default function Process() {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="font-sans text-sm text-cream-muted font-light max-w-xs leading-relaxed"
           >
-            Every campaign follows a structured path — from insight to execution to measurable results.
+            I believe effective marketing happens when strategy and creativity work together — every campaign follows a structured path from insight to execution to measurable results.
           </motion.p>
         </div>
 

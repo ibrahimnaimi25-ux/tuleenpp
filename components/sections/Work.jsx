@@ -159,7 +159,7 @@ export default function Work() {
               className="flex items-center gap-4 mb-6"
             >
               <div className="hr-gold" />
-              <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">02 / Work</span>
+              <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">03 / Work</span>
             </motion.div>
             <div className="overflow-hidden">
               <motion.h2
