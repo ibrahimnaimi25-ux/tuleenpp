@@ -196,7 +196,7 @@ export default function Work() {
           ))}
         </div>
 
-        {/* Featured full-width: Modeling */}
+        {/* Featured full-width */}
         {featuredProject && (
           <ProjectCard key={featuredProject.id} project={featuredProject} index={4} />
         )}
