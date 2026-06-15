@@ -65,7 +65,7 @@ export default function Contact() {
           className="flex items-center gap-4 mb-14 md:mb-16"
         >
           <div className="hr-gold" />
-          <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">06 / Contact</span>
+          <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">07 / Contact</span>
         </motion.div>
 
         {/* Headline row */}

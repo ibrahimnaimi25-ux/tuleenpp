@@ -5,6 +5,7 @@ import { motion, useInView } from 'framer-motion';
 import { content } from '../../lib/content';
 
 const { items } = content.experience;
+const { creativeExperience } = content.about;
 
 function ExperienceItem({ item, index }) {
   const ref = useRef(null);
@@ -16,37 +17,37 @@ function ExperienceItem({ item, index }) {
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: index * 0.08, duration: 0.75, ease: [0.76, 0, 0.24, 1] }}
-      className="group relative border border-white/[0.06] bg-[#0D0D0D] p-7 md:p-8
-        hover:border-gold/30 transition-colors duration-500"
+      className="relative pl-10 md:pl-14"
     >
-      <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8">
-        <span className="font-sans text-[11px] tracking-[0.3em] uppercase text-gold/80 flex-shrink-0 sm:w-32">
-          {item.period}
-        </span>
-        <div className="space-y-2">
-          <h3 className="font-sans text-sm tracking-[0.1em] uppercase font-medium text-cream">
-            {item.title}
-          </h3>
-          {item.company && (
-            <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-cream-muted">
-              {item.company}
+      {/* Timeline dot */}
+      <motion.span
+        className="absolute left-0 top-9 w-3 h-3 rounded-full bg-[#0A0A0A] border-2 border-gold"
+        initial={{ scale: 0 }}
+        animate={inView ? { scale: 1 } : {}}
+        transition={{ delay: index * 0.08 + 0.15, duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
+      />
+
+      <div className="group border border-white/[0.06] bg-[#0D0D0D] p-7 md:p-8
+        hover:border-gold/30 transition-colors duration-500">
+        <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8">
+          <span className="font-sans text-[11px] tracking-[0.3em] uppercase text-gold/80 flex-shrink-0 sm:w-32">
+            {item.period}
+          </span>
+          <div className="space-y-2">
+            <h3 className="font-sans text-sm tracking-[0.1em] uppercase font-medium text-cream">
+              {item.title}
+            </h3>
+            {item.company && (
+              <p className="font-sans text-[11px] tracking-[0.2em] uppercase text-cream-muted">
+                {item.company}
+              </p>
+            )}
+            <p className="font-sans text-sm text-cream-muted font-light leading-[1.8] max-w-2xl">
+              {item.description}
             </p>
-          )}
-          <p className="font-sans text-sm text-cream-muted font-light leading-[1.8] max-w-2xl">
-            {item.description}
-          </p>
+          </div>
         </div>
       </div>
-
-      {/* Left accent */}
-      <motion.div
-        className="absolute top-0 left-0 bottom-0 w-[1px] bg-gold/40"
-        initial={{ scaleY: 0 }}
-        whileInView={{ scaleY: 1 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.2 + index * 0.08, duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
-        style={{ transformOrigin: 'top' }}
-      />
     </motion.div>
   );
 }
@@ -54,6 +55,8 @@ function ExperienceItem({ item, index }) {
 export default function Experience() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
+  const creativeRef = useRef(null);
+  const creativeInView = useInView(creativeRef, { once: true, margin: '-60px' });
 
   return (
     <section id="experience" className="relative bg-[#0A0A0A] py-32 md:py-44 overflow-hidden">
@@ -72,7 +75,7 @@ export default function Experience() {
               className="flex items-center gap-4 mb-6"
             >
               <div className="hr-gold" />
-              <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">02 / Experience</span>
+              <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">03 / Experience</span>
             </motion.div>
             <div className="overflow-hidden">
               <motion.h2
@@ -97,11 +100,39 @@ export default function Experience() {
         </div>
 
         {/* Timeline */}
-        <div className="space-y-4">
-          {items.map((item, i) => (
-            <ExperienceItem key={i} item={item} index={i} />
-          ))}
+        <div className="relative">
+          {/* Connecting vertical line */}
+          <motion.div
+            className="absolute left-[5px] top-3 bottom-3 w-px bg-gradient-to-b from-gold/50 via-gold/15 to-transparent origin-top"
+            initial={{ scaleY: 0 }}
+            animate={inView ? { scaleY: 1 } : {}}
+            transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
+          />
+
+          <div className="space-y-4">
+            {items.map((item, i) => (
+              <ExperienceItem key={i} item={item} index={i} />
+            ))}
+          </div>
         </div>
+
+        {/* Creative Experience — grouped within Experience, separated by spacing */}
+        <motion.div
+          ref={creativeRef}
+          initial={{ opacity: 0, y: 24 }}
+          animate={creativeInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+          className="mt-16 md:mt-20 pl-10 md:pl-14"
+        >
+          <div className="border border-white/[0.06] bg-[#0D0D0D] p-7 md:p-8">
+            <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-cream-muted mb-4">
+              Creative Experience
+            </p>
+            <div className="space-y-3 text-cream-muted font-sans text-sm leading-[1.9] font-light max-w-2xl">
+              {creativeExperience.map((para, i) => <p key={i}>{para}</p>)}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

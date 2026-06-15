@@ -6,8 +6,10 @@ import Navigation from '../components/Navigation';
 import ScrollProgress from '../components/ScrollProgress';
 import Hero from '../components/sections/Hero';
 import About from '../components/sections/About';
+import Achievements from '../components/sections/Achievements';
 import Experience from '../components/sections/Experience';
 import Work from '../components/sections/Work';
+import StatsBanner from '../components/sections/StatsBanner';
 import Skills from '../components/sections/Skills';
 import Testimonials from '../components/sections/Testimonials';
 import Contact from '../components/sections/Contact';
@@ -24,8 +26,10 @@ export default function Page() {
       <main>
         <Hero />
         <About />
+        <Achievements />
         <Experience />
         <Work />
+        <StatsBanner />
         <Skills />
         <Testimonials />
         <Contact />

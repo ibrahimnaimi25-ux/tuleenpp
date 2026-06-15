@@ -5,11 +5,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const links = [
   { label: '01 About', href: '#about' },
-  { label: '02 Experience', href: '#experience' },
-  { label: '03 Work', href: '#work' },
-  { label: '04 Skills', href: '#skills' },
-  { label: '05 Process', href: '#process' },
-  { label: '06 Contact', href: '#contact' },
+  { label: '02 Achievements', href: '#achievements' },
+  { label: '03 Experience', href: '#experience' },
+  { label: '04 Work', href: '#work' },
+  { label: '05 Skills', href: '#skills' },
+  { label: '06 Process', href: '#process' },
+  { label: '07 Contact', href: '#contact' },
 ];
 
 export default function Navigation() {
@@ -96,18 +97,18 @@ export default function Navigation() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-[99] bg-black flex flex-col items-center justify-center"
+            className="fixed inset-0 z-[99] bg-black flex flex-col items-center justify-center overflow-y-auto py-24"
             initial={{ opacity: 0, clipPath: 'circle(0% at 95% 5%)' }}
             animate={{ opacity: 1, clipPath: 'circle(150% at 95% 5%)' }}
             exit={{ opacity: 0, clipPath: 'circle(0% at 95% 5%)' }}
             transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
           >
-            <div className="flex flex-col items-center gap-8">
+            <div className="flex flex-col items-center gap-5 sm:gap-8 my-auto">
               {links.map((link, i) => (
                 <motion.button
                   key={i}
                   onClick={() => scrollTo(link.href)}
-                  className="font-display text-4xl font-light text-cream hover:text-gold transition-colors"
+                  className="font-display text-3xl sm:text-4xl font-light text-cream hover:text-gold transition-colors"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.15 + i * 0.08, duration: 0.5 }}

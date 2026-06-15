@@ -6,7 +6,7 @@ import { content } from '../../lib/content';
 
 const { categories: skillCategories, tools } = content.skills;
 
-function SkillCard({ category, index }) {
+function SkillRow({ category, index }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
   const [hovered, setHovered] = useState(false);
@@ -14,70 +14,47 @@ function SkillCard({ category, index }) {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 35 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: index * 0.09, duration: 0.75, ease: [0.76, 0, 0.24, 1] }}
+      transition={{ delay: index * 0.07, duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative border border-white/[0.06] bg-[#0D0D0D] p-6 md:p-7 overflow-hidden
-        hover:border-white/[0.14] transition-colors duration-500 group"
+      className="grid sm:grid-cols-[260px_1fr] gap-4 sm:gap-10 items-start py-7 md:py-8
+        border-b border-white/[0.06] last:border-b-0 transition-colors duration-500"
     >
-      {/* Hover glow */}
-      <div
-        className="absolute top-0 left-0 right-0 h-[1px] transition-opacity duration-500"
-        style={{
-          background: `linear-gradient(90deg, transparent, ${category.color}60, transparent)`,
-          opacity: hovered ? 1 : 0,
-        }}
-      />
-
       {/* Icon + title */}
-      <div className="flex items-center gap-3 mb-5">
+      <div className="flex items-center gap-4">
         <span
-          className="text-lg transition-transform duration-400"
+          className="text-2xl transition-transform duration-400"
           style={{
             color: category.color,
             transform: hovered ? 'scale(1.2)' : 'scale(1)',
             display: 'inline-block',
-            transition: 'transform 0.3s ease',
           }}
         >
           {category.icon}
         </span>
-        <h3 className="font-sans text-[11px] tracking-[0.25em] uppercase text-cream/80 font-medium">
+        <h3 className="font-display font-light text-xl md:text-2xl text-cream leading-tight">
           {category.title}
         </h3>
       </div>
 
-      {/* Skills */}
-      <div className="space-y-2.5">
+      {/* Skill pills */}
+      <div className="flex flex-wrap gap-2.5">
         {category.skills.map((skill, i) => (
-          <motion.div
+          <motion.span
             key={i}
-            initial={{ opacity: 0, x: -10 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: index * 0.09 + 0.2 + i * 0.06, duration: 0.5 }}
-            className="flex items-center gap-2.5 group/item"
+            initial={{ opacity: 0, y: 8 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: index * 0.07 + 0.1 + i * 0.04, duration: 0.5 }}
+            className="font-sans text-[11px] tracking-[0.15em] uppercase text-cream-muted border border-white/[0.08]
+              px-3.5 py-1.5 hover:border-current hover:text-cream transition-all duration-300"
+            style={{ borderColor: hovered ? `${category.color}50` : undefined }}
           >
-            <div
-              className="w-1 h-1 rounded-full flex-shrink-0 transition-all duration-300 group-hover/item:scale-150"
-              style={{ backgroundColor: `${category.color}80` }}
-            />
-            <span className="font-sans text-sm text-cream-muted font-light hover:text-cream transition-colors duration-200">
-              {skill}
-            </span>
-          </motion.div>
+            {skill}
+          </motion.span>
         ))}
       </div>
-
-      {/* Bottom accent line that grows on hover */}
-      <motion.div
-        className="absolute bottom-0 left-0 h-[1px]"
-        style={{ backgroundColor: `${category.color}50` }}
-        initial={{ width: 0 }}
-        animate={{ width: hovered ? '100%' : '0%' }}
-        transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
-      />
     </motion.div>
   );
 }
@@ -95,7 +72,7 @@ export default function Skills() {
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-16 lg:px-24">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 md:mb-24">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 md:mb-16">
           <div>
             <motion.div
               ref={ref}
@@ -105,7 +82,7 @@ export default function Skills() {
               className="flex items-center gap-4 mb-6"
             >
               <div className="hr-gold" />
-              <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">04 / Skills</span>
+              <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">05 / Skills</span>
             </motion.div>
             <div className="overflow-hidden">
               <motion.h2
@@ -130,15 +107,15 @@ export default function Skills() {
           </motion.p>
         </div>
 
-        {/* Skills grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-16">
+        {/* Skills list — divided rows instead of card grid */}
+        <div className="border-t border-white/[0.06]">
           {skillCategories.map((cat, i) => (
-            <SkillCard key={i} category={cat} index={i} />
+            <SkillRow key={i} category={cat} index={i} />
           ))}
         </div>
 
         {/* Tools section */}
-        <div ref={toolsRef}>
+        <div ref={toolsRef} className="mt-16 md:mt-20">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={toolsInView ? { opacity: 1, y: 0 } : {}}

@@ -6,25 +6,49 @@ import Link from 'next/link';
 import { projects } from '../../lib/projects';
 import { AutoplayVideo } from '../ui/VideoPlayer';
 
+// Aspect ratio + title scale per card size
+const SIZE_STYLES = {
+  featured: {
+    aspect: 'aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]',
+    title: 'clamp(2.2rem, 6vw, 5rem)',
+    span: 'lg:col-span-3',
+  },
+  large: {
+    aspect: 'aspect-[4/3] sm:aspect-[16/9]',
+    title: 'clamp(2rem, 4vw, 3.5rem)',
+    span: 'lg:col-span-2',
+  },
+  medium: {
+    aspect: 'aspect-[4/3] lg:aspect-[3/4]',
+    title: 'clamp(1.5rem, 3vw, 2.5rem)',
+    span: 'lg:col-span-1',
+  },
+  small: {
+    aspect: 'aspect-[4/3]',
+    title: 'clamp(1.5rem, 3vw, 2.5rem)',
+    span: 'lg:col-span-1',
+  },
+};
+
 function ProjectCard({ project, index }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const [hovered, setHovered] = useState(false);
 
-  const isLarge = project.size === 'large';
+  const { aspect, title, span } = SIZE_STYLES[project.size] || SIZE_STYLES.small;
+  const isFeatured = project.size === 'featured';
 
   return (
-    <Link href={`/work/${project.slug}`}>
+    <Link href={`/work/${project.slug}`} className={span}>
       <motion.div
         ref={ref}
         data-cursor="view"
         initial={{ opacity: 0, y: 50 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: index * 0.12, duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
-        className="relative overflow-hidden group cursor-pointer"
+        transition={{ delay: index * 0.1, duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+        className={`relative overflow-hidden group cursor-pointer ${aspect}`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        style={{ aspectRatio: isLarge ? '16/10' : '4/3' }}
       >
         {/* Background */}
         <div
@@ -114,12 +138,12 @@ function ProjectCard({ project, index }) {
               {project.category}
             </p>
             <h3 className="font-display font-light leading-none"
-              style={{ fontSize: isLarge ? 'clamp(2rem, 4vw, 3.5rem)' : 'clamp(1.5rem, 3vw, 2.5rem)' }}>
+              style={{ fontSize: title }}>
               <span className="text-cream">{project.name}</span>
             </h3>
           </div>
           <div className="text-right">
-            <p className="font-display font-light text-5xl md:text-7xl opacity-10 text-cream select-none leading-none">
+            <p className={`font-display font-light opacity-10 text-cream select-none leading-none ${isFeatured ? 'text-6xl md:text-8xl' : 'text-5xl md:text-7xl'}`}>
               {project.id}
             </p>
             <p className="font-sans text-[10px] text-cream-muted tracking-[0.2em]">{project.year}</p>
@@ -134,8 +158,12 @@ export default function Work() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
-  const largeProjects = projects.filter((_, i) => i < 2).map((p) => ({ ...p, size: 'large' }));
-  const smallProjects = projects.filter((_, i) => i >= 2).map((p) => ({ ...p, size: 'small' }));
+  // Layout map — gives the first project a featured full-width slot,
+  // the second a wide slot, the third a tall slot, and the rest standard cards.
+  const sizedProjects = projects.map((p, i) => {
+    const size = i === 0 ? 'featured' : i === 1 ? 'large' : i === 2 ? 'medium' : 'small';
+    return { ...p, size };
+  });
 
   return (
     <section id="work" className="relative bg-[#080808] py-32 md:py-44 overflow-hidden">
@@ -158,7 +186,7 @@ export default function Work() {
               className="flex items-center gap-4 mb-6"
             >
               <div className="hr-gold" />
-              <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">03 / Work</span>
+              <span className="font-sans text-xs text-cream-muted tracking-[0.35em] uppercase">04 / Work</span>
             </motion.div>
             <div className="overflow-hidden">
               <motion.h2
@@ -181,17 +209,10 @@ export default function Work() {
           </motion.p>
         </div>
 
-        {/* Large projects row */}
-        <div className="grid md:grid-cols-2 gap-4 mb-4">
-          {largeProjects.map((project, i) => (
+        {/* Mosaic grid — featured project spans full width, followed by varied card sizes */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          {sizedProjects.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} />
-          ))}
-        </div>
-
-        {/* Small projects grid */}
-        <div className="grid md:grid-cols-2 gap-4">
-          {smallProjects.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i + 2} />
           ))}
         </div>
       </div>
