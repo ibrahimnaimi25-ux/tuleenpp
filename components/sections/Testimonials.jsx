@@ -3,12 +3,15 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { content } from '../../lib/content';
+import { ar } from '../../lib/ar';
+import { useLang } from '../../lib/LanguageContext';
 
 const steps = content.process.steps;
 
-function StepCard({ step, index }) {
+function StepCard({ step, index, arDescription, lang }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
+  const description = lang === 'ar' ? arDescription : step.description;
 
   return (
     <motion.div
@@ -41,8 +44,11 @@ function StepCard({ step, index }) {
           >
             {step.title}
           </h3>
-          <p className="font-sans text-sm text-cream-muted font-light leading-[1.8]">
-            {step.description}
+          <p
+            className={`text-sm text-cream-muted font-light leading-[1.8] ${lang === 'ar' ? 'font-arabic text-right' : 'font-sans'}`}
+            dir={lang === 'ar' ? 'rtl' : undefined}
+          >
+            {description}
           </p>
         </div>
       </div>
@@ -63,6 +69,7 @@ function StepCard({ step, index }) {
 export default function Process() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-100px' });
+  const { lang } = useLang();
 
   return (
     <section id="process" className="relative bg-[#080808] py-32 md:py-44 overflow-hidden">
@@ -109,7 +116,13 @@ export default function Process() {
         {/* Steps */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {steps.map((step, i) => (
-            <StepCard key={i} step={step} index={i} />
+            <StepCard
+              key={i}
+              step={step}
+              index={i}
+              arDescription={ar.process.steps[i]?.description}
+              lang={lang}
+            />
           ))}
         </div>
       </div>

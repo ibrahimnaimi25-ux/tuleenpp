@@ -3,6 +3,8 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { content } from '../../lib/content';
+import { ar } from '../../lib/ar';
+import { useLang } from '../../lib/LanguageContext';
 
 const { about } = content;
 
@@ -141,6 +143,9 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
   const rightRef = useRef(null);
   const rightInView = useInView(rightRef, { once: true, margin: '-80px' });
+  const { lang } = useLang();
+  const bio = lang === 'ar' ? ar.about.bio : about.bio;
+  const arText = lang === 'ar' ? 'font-arabic text-right' : '';
 
   return (
     <section id="about" className="relative bg-[#0A0A0A] py-32 md:py-44 overflow-hidden">
@@ -234,9 +239,10 @@ export default function About() {
               initial={{ opacity: 0, y: 20 }}
               animate={rightInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.3, duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-              className="space-y-5 text-cream-muted font-sans text-base leading-[1.9] font-light max-w-xl"
+              className={`space-y-5 text-cream-muted text-base leading-[1.9] font-light max-w-xl ${arText || 'font-sans'}`}
+              dir={lang === 'ar' ? 'rtl' : undefined}
             >
-              {about.bio.map((para, i) => <p key={i}>{para}</p>)}
+              {bio.map((para, i) => <p key={i}>{para}</p>)}
             </motion.div>
 
             {/* Divider */}

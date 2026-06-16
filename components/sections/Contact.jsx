@@ -4,6 +4,8 @@ import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import MagneticButton from '../ui/MagneticButton';
 import { content } from '../../lib/content';
+import { ar } from '../../lib/ar';
+import { useLang } from '../../lib/LanguageContext';
 
 const { contact: c } = content;
 
@@ -19,6 +21,8 @@ export default function Contact() {
   const [status, setStatus] = useState('idle');
 
   const email = c.email;
+  const { lang } = useLang();
+  const intro = lang === 'ar' ? ar.contact.intro : c.intro;
 
   const copyEmail = () => {
     navigator.clipboard?.writeText(email).then(() => {
@@ -91,9 +95,10 @@ export default function Contact() {
             initial={{ opacity: 0, y: 12 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.45, duration: 0.7 }}
-            className="font-sans text-sm text-cream-muted font-light max-w-md leading-relaxed mt-5"
+            className={`text-sm text-cream-muted font-light max-w-md leading-relaxed mt-5 ${lang === 'ar' ? 'font-arabic text-right' : 'font-sans'}`}
+            dir={lang === 'ar' ? 'rtl' : undefined}
           >
-            {c.intro}
+            {intro}
           </motion.p>
         </div>
 

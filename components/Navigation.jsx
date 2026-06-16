@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLang } from '../lib/LanguageContext';
 
 const links = [
   { label: '01 About', href: '#about' },
@@ -16,6 +17,7 @@ const links = [
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { lang, toggle } = useLang();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -60,6 +62,12 @@ export default function Navigation() {
                 <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] bg-gold transition-all duration-300 group-hover:w-full" />
               </button>
             ))}
+            <button
+              onClick={toggle}
+              className="font-sans text-xs tracking-[0.2em] uppercase px-4 py-2 border border-white/20 text-cream-muted hover:border-gold/40 hover:text-gold transition-all duration-300"
+            >
+              {lang === 'en' ? 'AR' : 'EN'}
+            </button>
             <button
               onClick={() => scrollTo('#contact')}
               className="font-sans text-xs tracking-[0.2em] uppercase px-5 py-2.5 border border-gold/40 text-gold hover:bg-gold hover:text-black transition-all duration-300"
@@ -116,6 +124,15 @@ export default function Navigation() {
                   {link.label}
                 </motion.button>
               ))}
+              <motion.button
+                onClick={toggle}
+                className="font-sans text-xs tracking-[0.3em] uppercase mt-4 px-6 py-2.5 border border-white/20 text-cream-muted hover:border-gold/40 hover:text-gold transition-all duration-300"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.15 + links.length * 0.08, duration: 0.5 }}
+              >
+                {lang === 'en' ? 'عربي' : 'English'}
+              </motion.button>
             </div>
           </motion.div>
         )}

@@ -3,13 +3,16 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { content } from '../../lib/content';
+import { ar } from '../../lib/ar';
+import { useLang } from '../../lib/LanguageContext';
 
 const { items } = content.experience;
 const { creativeExperience } = content.about;
 
-function ExperienceItem({ item, index }) {
+function ExperienceItem({ item, index, arDescription, lang }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
+  const description = lang === 'ar' ? arDescription : item.description;
 
   return (
     <motion.div
@@ -42,8 +45,11 @@ function ExperienceItem({ item, index }) {
                 {item.company}
               </p>
             )}
-            <p className="font-sans text-sm text-cream-muted font-light leading-[1.8] max-w-2xl">
-              {item.description}
+            <p
+              className={`text-sm text-cream-muted font-light leading-[1.8] max-w-2xl ${lang === 'ar' ? 'font-arabic text-right' : 'font-sans'}`}
+              dir={lang === 'ar' ? 'rtl' : undefined}
+            >
+              {description}
             </p>
           </div>
         </div>
@@ -57,6 +63,8 @@ export default function Experience() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
   const creativeRef = useRef(null);
   const creativeInView = useInView(creativeRef, { once: true, margin: '-60px' });
+  const { lang } = useLang();
+  const creative = lang === 'ar' ? ar.about.creativeExperience : creativeExperience;
 
   return (
     <section id="experience" className="relative bg-[#0A0A0A] py-32 md:py-44 overflow-hidden">
@@ -111,7 +119,13 @@ export default function Experience() {
 
           <div className="space-y-4">
             {items.map((item, i) => (
-              <ExperienceItem key={i} item={item} index={i} />
+              <ExperienceItem
+                key={i}
+                item={item}
+                index={i}
+                arDescription={ar.experience.items[i]?.description}
+                lang={lang}
+              />
             ))}
           </div>
         </div>
@@ -128,8 +142,11 @@ export default function Experience() {
             <p className="font-sans text-[10px] tracking-[0.35em] uppercase text-cream-muted mb-4">
               Creative Experience
             </p>
-            <div className="space-y-3 text-cream-muted font-sans text-sm leading-[1.9] font-light max-w-2xl">
-              {creativeExperience.map((para, i) => <p key={i}>{para}</p>)}
+            <div
+              className={`space-y-3 text-cream-muted text-sm leading-[1.9] font-light max-w-2xl ${lang === 'ar' ? 'font-arabic text-right' : 'font-sans'}`}
+              dir={lang === 'ar' ? 'rtl' : undefined}
+            >
+              {creative.map((para, i) => <p key={i}>{para}</p>)}
             </div>
           </div>
         </motion.div>

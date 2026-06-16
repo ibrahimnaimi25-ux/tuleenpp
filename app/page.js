@@ -13,11 +13,13 @@ import StatsBanner from '../components/sections/StatsBanner';
 import Skills from '../components/sections/Skills';
 import Testimonials from '../components/sections/Testimonials';
 import Contact from '../components/sections/Contact';
+import { LanguageProvider } from '../lib/LanguageContext';
 
 const Loader = dynamic(() => import('../components/Loader'), { ssr: false });
 
 export default function Page() {
   return (
+    <LanguageProvider>
     <SmoothScroll>
       <Loader />
       <ScrollProgress />
@@ -35,5 +37,6 @@ export default function Page() {
         <Contact />
       </main>
     </SmoothScroll>
+    </LanguageProvider>
   );
 }

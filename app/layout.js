@@ -1,4 +1,4 @@
-import { Cormorant, Inter } from 'next/font/google';
+import { Cormorant, Inter, Cairo } from 'next/font/google';
 import './globals.css';
 import dynamic from 'next/dynamic';
 
@@ -19,6 +19,13 @@ const inter = Inter({
   display: 'swap',
 });
 
+const cairo = Cairo({
+  subsets: ['arabic', 'latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-arabic',
+  display: 'swap',
+});
+
 export const metadata = {
   title: 'Tuleen — Strategic Marketing & Brand Architecture',
   description: 'Award-winning marketing professional crafting brand narratives that define industries and move people.',
@@ -32,7 +39,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${inter.variable} ${cairo.variable}`}>
       <body className="bg-black text-cream font-sans overflow-x-hidden">
         <CustomCursor />
         {children}

@@ -29,6 +29,7 @@ module.exports = {
       fontFamily: {
         display: ['var(--font-display)', 'serif'],
         sans: ['var(--font-sans)', 'sans-serif'],
+        arabic: ['var(--font-arabic)', 'Cairo', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
